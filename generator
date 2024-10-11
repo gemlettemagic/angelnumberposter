@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Lifestyle Poster Creator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9; /* Light background */
+            color: #333; /* Dark text color */
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px; /* Limit width */
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 1.5em; /* Increased font size */
+            margin-bottom: 10px;
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 24px; /* Rounded corners */
+            width: 100%;
+            font-family: 'Georgia', serif; /* Serif font for input */
+            font-weight: bold; /* Bold text */
+            text-transform: uppercase; /* Uppercase text */
+            color: #40E0D0; /* Light turquoise color */
+            text-align: center; /* Center text */
+        }
+        input::placeholder {
+            color: rgba(64, 224, 208, 0.5); /* Lighter placeholder color */
+        }
+        /* Button Style */
+        .button-17 {
+            align-items: center;
+            appearance: none;
+            background-color: #fff;
+            border-radius: 24px;
+            border-style: none;
+            box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+            box-sizing: border-box;
+            color: #69D7C6; /* Button text color */
+            cursor: pointer;
+            display: inline-flex;
+            fill: currentcolor;
+            font-family: 'Georgia', serif; /* Changed to serif font */
+            font-size: 14px;
+            font-weight: bold; /* Bold text */
+            height: 48px;
+            justify-content: center;
+            letter-spacing: .25px;
+            line-height: normal;
+            max-width: 100%;
+            overflow: visible;
+            padding: 2px 24px;
+            position: relative;
+            text-align: center;
+            text-transform: uppercase; /* Set text to uppercase */
+            transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1), opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: auto;
+            will-change: transform, opacity;
+            z-index: 0;
+        }
+        .button-17:hover {
+            background: #40E0D0; /* Change background to turquoise on hover */
+            color: white; /* Change text color to white on hover */
+        }
+        .button-17:active {
+            box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+            outline: none;
+        }
+        .button-17:focus {
+            outline: none;
+            border: 2px solid #4285f4;
+        }
+        .button-17:not(:disabled) {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+        }
+        .button-17:not(:disabled):hover {
+            box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+        }
+        .button-17:not(:disabled):focus {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+        }
+        .button-17:not(:disabled):active {
+            box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+        }
+        .button-17:disabled {
+            box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+        }
+
+        #poster {
+            width: 400px; /* Width */
+            height: 500px; /* Height */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align items to the top */
+            align-items: center;
+            position: relative;
+            margin-top: 20px;
+            overflow: hidden;
+            text-align: center;
+            background-color: #f0f0f0; /* Light background for visibility */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        #background-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Bottom layer */
+            display: none; /* Initially hidden */
+            border-radius: 10px; /* Match poster's corners */
+        }
+        #wing-image {
+            position: absolute;
+            width: 200px; /* Size for wings */
+            height: auto;
+            top: 25%; /* Original alignment */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust to center */
+            z-index: 5; /* Middle layer */
+            display: none; /* Initially hidden */
+        }
+        #angel-number-display {
+            font-size: 64px; /* Main angel number size */
+            font-weight: bold;
+            z-index: 10; /* Top layer */
+            margin: 0;
+            font-family: 'Georgia', serif; /* Serif font */
+            position: absolute; /* Positioning */
+            top: 25%; /* Original alignment */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust to center */
+        }
+        #angel-number-headline {
+            font-size: 16px; /* Headline size */
+            font-weight: bold;
+            z-index: 10; /* Top layer */
+            margin: 0;
+            font-family: 'Georgia', serif; /* Serif font */
+            position: absolute; /* Positioning */
+            top: 40%; /* Original alignment */
+            left: 25px; /* 25px away from the left */
+            right: 25px; /* 25px away from the right */
+            text-align: center; /* Center text */
+        }
+        #meaning-display {
+            font-size: 12px; /* Meaning size */
+            margin-top: 10px;
+            z-index: 10; /* Same layer as angel number */
+            position: absolute; /* Positioning */
+            top: 50%; /* Original alignment */
+            left: 25px; /* 25px away from the left */
+            right: 25px; /* 25px away from the right */
+            color: black; /* Default color */
+            line-height: 1.2; /* Line height for readability */
+            text-align: justify; /* Justify alignment */
+            font-family: 'Georgia', serif; /* Serif font */
+            font-weight: bold; /* Bold text */
+        }
+        
+        /* Increased margin for the download button */
+        #download {
+            margin-top: 40px; /* Increased margin */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="input-container">
+        <input type="text" id="angel-number" placeholder="ENTER YOUR ANGEL NUMBER" />
+        <button class="button-17" id="generate" role="button">Generate Poster</button>
+    </div>
+
+    <div id="poster">
+        <img id="background-image" style="display:none;" />
+        <img id="wing-image" style="display:none;" />
+        <div id="angel-number-display">111</div>
+        <div id="angel-number-headline">New Beginnings • Manifestation • Spiritual Awakening</div>
+        <div id="meaning-display">
+            It’s a wake-up call. Angel Number 111 is your invitation to take charge of your thoughts and intentions. The universe is wide open, and it's time to plant the seeds of your future. Don’t sit back and wait for life to happen; get clear on what you want and focus all your energy on it. This is about creating a new chapter where your thoughts shape your reality. Step into your power, leave self-doubt behind, and trust that your ideas are valid. The universe is paying attention, so give it something worth watching. Take that first step and set your intentions in motion—this is your time to manifest.
+        </div>
+    </div>
+
+    <button class="button-17" id="download" role="button">Download Poster</button>
+
+    <script>
+        const generateButton = document.getElementById('generate');
+        const angelNumberDisplay = document.getElementById('angel-number-display');
+        const angelNumberHeadline = document.getElementById('angel-number-headline');
+        const meaningDisplay = document.getElementById('meaning-display');
+        const backgroundImage = document.getElementById('background-image');
+        const wingImage = document.getElementById('wing-image');
+
+        // Updated URLs for the background and wing images
+        const backgrounds = [
+            'https://i.imgur.com/X6sFcd4.png' // Background image
+        ];
+
+        const wings = [
+            'https://i.imgur.com/6p33W70.png' // Wing image
+        ];
+
+        function generatePoster() {
+            // Load background image
+            const randomBackgroundIndex = Math.floor(Math.random() * backgrounds.length);
+            backgroundImage.src = backgrounds[randomBackgroundIndex];
+            backgroundImage.onload = () => {
+                backgroundImage.style.display = 'block'; // Show the background image
+            };
+            backgroundImage.onerror = () => {
+                console.error("Error loading background image.");
+            };
+
+            // Load wing image
+            const randomWingIndex = Math.floor(Math.random() * wings.length);
+            wingImage.src = wings[randomWingIndex];
+            wingImage.onload = () => {
+                wingImage.style.display = 'block'; // Show the wing image
+            };
+            wingImage.onerror = () => {
+                console.error("Error loading wing image.");
+            };
+
+            // Change the font color based on background brightness
+            const isLightBackground = backgroundColorIsLight(backgroundImage);
+            angelNumberDisplay.style.color = isLightBackground ? 'black' : 'white';
+            angelNumberHeadline.style.color = isLightBackground ? 'black' : 'white';
+            meaningDisplay.style.color = isLightBackground ? 'black' : 'white';
+        }
+
+        function backgroundColorIsLight(image) {
+            // Simplified for demonstration; assume light for now
+            return true;
+        }
+
+        function downloadPoster() {
+            const poster = document.getElementById('poster');
+            html2canvas(poster).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'poster.png';
+                link.click();
+            });
+        }
+
+        generateButton.addEventListener('click', generatePoster);
+        document.getElementById('download').addEventListener('click', downloadPoster);
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+</body>
+</html>
